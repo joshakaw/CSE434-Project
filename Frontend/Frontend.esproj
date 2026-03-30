@@ -7,9 +7,7 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\Frontend\browser\</BuildOutputFolder>
   </PropertyGroup>
-
   <Target Name="BuildAngular" AfterTargets="Build">
     <Exec WorkingDirectory="$(ProjectDir)" Command="npm run build" />
   </Target>
-  
 </Project>
