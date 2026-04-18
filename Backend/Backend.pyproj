@@ -18,6 +18,9 @@
     <RootNamespace>Backend</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
     <WebBrowserPort>5000</WebBrowserPort>
+    <TestFramework>unittest</TestFramework>
+    <UnitTestPattern>test*.py</UnitTestPattern>
+    <UnitTestRootDirectory>.\Backend\test</UnitTestRootDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,8 +32,47 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.py" />
+    <Compile Include="classifier\healthguide\config.py" />
+    <Compile Include="classifier\healthguide\dataset.py" />
+    <Compile Include="classifier\healthguide\demo.py" />
+    <Compile Include="classifier\healthguide\evaluate.py" />
+    <Compile Include="classifier\healthguide\model.py" />
+    <Compile Include="classifier\healthguide\prepare_data.py" />
+    <Compile Include="classifier\healthguide\train.py" />
+    <Compile Include="classifier\healthguide\__init__.py" />
+    <Compile Include="classifier\run_pipeline.py" />
+    <Compile Include="genai.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test_genai.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="classifier\data\processed\combined_train.csv" />
+    <Content Include="classifier\data\processed\combined_val.csv" />
+    <Content Include="classifier\healthguide\__pycache__\config.cpython-311.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\config.cpython-312.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\dataset.cpython-311.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\dataset.cpython-312.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\demo.cpython-312.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\evaluate.cpython-311.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\evaluate.cpython-312.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\model.cpython-311.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\model.cpython-312.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\prepare_data.cpython-311.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\prepare_data.cpython-312.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\train.cpython-311.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\train.cpython-312.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\__init__.cpython-311.pyc" />
+    <Content Include="classifier\healthguide\__pycache__\__init__.cpython-312.pyc" />
+    <Content Include="classifier\models\healthguide_model\config.json" />
+    <Content Include="classifier\models\healthguide_model\model.safetensors" />
+    <Content Include="classifier\models\healthguide_model\tokenizer.json" />
+    <Content Include="classifier\models\healthguide_model\tokenizer_config.json" />
+    <Content Include="README.md">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +92,16 @@
       <Project>{349ec62a-85e3-c852-f5ff-e97a8e3ab0f5}</Project>
       <Private>True</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="classifier\" />
+    <Folder Include="classifier\data\" />
+    <Folder Include="classifier\data\processed\" />
+    <Folder Include="classifier\healthguide\" />
+    <Folder Include="classifier\healthguide\__pycache__\" />
+    <Folder Include="classifier\models\" />
+    <Folder Include="classifier\models\healthguide_model\" />
+    <Folder Include="test\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

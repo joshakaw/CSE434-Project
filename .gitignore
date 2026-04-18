@@ -10,3 +10,6 @@
 .vs
 .vscode
 */aobj
+/Backend/classifier/models/healthguide_model/model.safetensors
+/TestResults
+/.pytest_cahce

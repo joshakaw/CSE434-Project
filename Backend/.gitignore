@@ -1,3 +1,4 @@
 /env
 /obj
 *.user
+__pycache__/
