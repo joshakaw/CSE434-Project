@@ -1,13 +1,20 @@
-<p>dashboard-component works!</p>
-It works
+<h1>Inpatients</h1>
+<mat-grid-list cols="5" rowHeight="200px" gutterSize="8px">
+  @for (item of inpatients; track $index) {
+    <mat-grid-tile class="grid-tile">
+      <div class="tile-content" matRipple [matRippleUnbounded]="false">
+        <div class="tile-title">{{ item.name }}</div>
+        
+        @if (item.status == Urgency.Urgent) {
+          <div class="tile-subtitle" style="color:red">Urgent</div>
+        }
 
-<mat-grid-list cols="3">
-    @for (item of inpatients; track $index) {
-        <mat-grid-tile>
-            <mat-card appearance="outlined" style="height: 100%; width:100%">
-                <mat-card-title>{{item.name}}</mat-card-title>
-                <mat-card-content>Urgency: {{item.status}}</mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
-    }
+        <hr class="separator" />
+
+        <div class="tile-summary">
+          {{ item.summary }}
+        </div>
+      </div>
+    </mat-grid-tile>
+  }
 </mat-grid-list>

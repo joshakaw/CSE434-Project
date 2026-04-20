@@ -1,0 +1,49 @@
+/* Container to center content inside the tile */
+.tile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  padding: 10px
+}
+
+/* Mimics mat-card-title styling */
+.tile-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Mimics mat-card-subtitle styling */
+.tile-subtitle {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 4px;
+}
+
+/* The line separator */
+.separator {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--mat-sys-surface-container-highest); /* Light gray line */
+  margin: 12px 0;
+}
+
+/* Summary styling */
+.tile-summary {
+  font-size: 14px;
+  color: #333;
+}
+
+.grid-tile {
+    background-color: var(--mat-sys-surface-container-low);
+    cursor: pointer;
+}
+
+.grid-tile:hover {
+  // background-color: var(--mat-sys-surface-container-low);
+  box-shadow: var(--mat-sys-level4);
+}
