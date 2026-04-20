@@ -1,2 +1,13 @@
 <p>dashboard-component works!</p>
 It works
+
+<mat-grid-list cols="3">
+    @for (item of inpatients; track $index) {
+        <mat-grid-tile>
+            <mat-card appearance="outlined" style="height: 100%; width:100%">
+                <mat-card-title>{{item.name}}</mat-card-title>
+                <mat-card-content>Urgency: {{item.status}}</mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    }
+</mat-grid-list>
