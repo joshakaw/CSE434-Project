@@ -2,3 +2,4 @@
 /obj
 *.user
 __pycache__/
+secrets.json

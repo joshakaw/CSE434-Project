@@ -9,9 +9,16 @@ from sklearn.cluster import KMeans
 import random, numpy as np, re, evaluate
 import time
 
+import json
+
+with open('secrets.json', 'r', encoding='utf-8') as file:
+    config = json.load(file)
+
+gemini_api_key = config['gemini_api_key']
+
 # ===================== STUDENT TODO START =====================
 # Replace YOUR_API_KEY_HERE with your actual Gemini API key
-genai.configure(api_key="AIzaSyD2WBX1Xr_LC1sxPSuUBfoC_IKS0q9spjQ")
+genai.configure(api_key=gemini_api_key)
 # ===================== STUDENT TODO START =====================
 
 # Initialize Gemini 2.5 Flash Lite model
@@ -27,11 +34,17 @@ except FileNotFoundError as e:
     sys.exit(1)
 
 
-def summarize_patient_sheet(content: string) -> string:
+def summarize_patient_sheet(
+    content: string, preprompt: string = "", rag: bool = True
+) -> string:
     prompt = ""
-    
-    # Get relevant information from classifier
-    prompt += str(predict(content, model, tokenizer, device))
+
+    if preprompt:
+        prompt += preprompt + "\n\nQ:"
+
+    if rag:
+        # Get relevant information from classifier
+        prompt += str(predict(content, model, tokenizer, device))
 
     prompt += "\n"
 
@@ -40,4 +53,4 @@ def summarize_patient_sheet(content: string) -> string:
 
     response = gemini_model.generate_content(prompt)
 
-    return (prompt,response)
+    return (prompt, response.text)
