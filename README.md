@@ -1,4 +1,6 @@
-# CSE434-Project2
+# HealthGuide (CSE 434: Gen AI)
+
+How can we use generative AI to reduce wait times and allow practitioners to allocate resources _before_ patient arrival? Historically patients' conditions is only evaluated at the time-of-arrival to a hospital, which leads to a small amount of wait time as resources are allocated to treat the symptoms. In urgent situations like heart attack, uncontrollable bleeding, or high fever, every minute lost exponentially decreases the effectiveness of treatment. HealthGuide allows a patient to be evaluated before their arrival to the hospital (with the help of an app, connected to 911 centers, or a phone service) to give practitioners an early triage rating of arriving patients. Additionally, departments related to the incoming patient's condition are detected. This repository contains code for triage evaluation part.
 
 # Project Structure
 The project is separated into a Backend (which uses Python & Flask) and a
