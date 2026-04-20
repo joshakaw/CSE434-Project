@@ -21,17 +21,8 @@ export enum Urgency {
   selector: 'app-dashboard-component',
   imports: [
     MatGridListModule,
-    MatCard,
-    MatCardTitle,
-    MatCardContent,
-    MatCardHeader,
-    MatCardAvatar,
-    MatCardHeader,
-    MatCardActions,
-    MatAnchor,
-    MatCardSubtitle,
-    MatRipple,
-  ],
+    MatRipple
+],
   templateUrl: './dashboard-component.html',
   styleUrl: './dashboard-component.scss',
 })

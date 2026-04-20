@@ -7,7 +7,7 @@
   text-align: center;
   height: 100%;
   width: 100%;
-  padding: 10px
+  padding: 10px;
 }
 
 /* Mimics mat-card-title styling */
@@ -39,8 +39,8 @@
 }
 
 .grid-tile {
-    background-color: var(--mat-sys-surface-container-low);
-    cursor: pointer;
+  background-color: var(--mat-sys-surface-container-low);
+  cursor: pointer;
 }
 
 .grid-tile:hover {
