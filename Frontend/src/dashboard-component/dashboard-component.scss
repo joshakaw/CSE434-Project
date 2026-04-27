@@ -20,8 +20,12 @@
 /* Mimics mat-card-subtitle styling */
 .tile-subtitle {
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--mat-sys-primary);
   margin-top: 4px;
+}
+
+.tile-subtitle.urgent {
+  color: var(--mat-sys-error)
 }
 
 /* The line separator */
@@ -35,7 +39,7 @@
 /* Summary styling */
 .tile-summary {
   font-size: 14px;
-  color: #333;
+  color: var(--mat-sys-on-surface-variant);
 }
 
 .grid-tile {
