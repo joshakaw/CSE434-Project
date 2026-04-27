@@ -1,8 +1,34 @@
-<mat-toolbar>
-  <span>HealthGuide</span>
-</mat-toolbar>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #sidenav mode="push" [autoFocus]="false">
+    <mat-list>
+      <mat-list-item>
+        <h2>Menu</h2>
+      </mat-list-item>
+    </mat-list>
+    <mat-nav-list>
+      @for (link of links; track $index) {
+      <mat-list-item routerLink="{{link.routerLink}}" 
+      routerLinkActive
+      #rla="routerLinkActive"
+      [activated]="rla.isActive"
+      (click)="sidenav.close()">
+        <mat-icon matListItemIcon>{{link.icon}}</mat-icon> 
+        <a matListItemTitle  > 
+          {{link.name}} </a>
+      </mat-list-item>
+      }
 
-<div class="container">
-  <router-outlet />
-</div>
-
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button matIconButton (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>HealthGuide</span>
+    </mat-toolbar>
+    <div class="container">
+      <router-outlet />
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

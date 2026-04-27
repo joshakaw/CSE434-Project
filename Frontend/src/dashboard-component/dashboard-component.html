@@ -1,5 +1,5 @@
-<h1>Inpatients</h1>
-<mat-grid-list cols="5" rowHeight="200px" gutterSize="8px">
+<h1>Incoming Patients</h1>
+<mat-grid-list [cols]="cols$ | async" rowHeight="200px" gutterSize="8px">
   @for (item of inpatients; track $index) {
     <mat-grid-tile class="grid-tile">
       <div class="tile-content" matRipple [matRippleUnbounded]="false">

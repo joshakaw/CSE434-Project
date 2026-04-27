@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {
   MatCard,
@@ -11,6 +11,11 @@ import {
 } from '@angular/material/card';
 import { MatAnchor } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
+import { BehaviorSubject, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { AsyncPipe } from '@angular/common';
 
 export enum Urgency {
   Urgent,
@@ -19,16 +24,36 @@ export enum Urgency {
 
 @Component({
   selector: 'app-dashboard-component',
-  imports: [
-    MatGridListModule,
-    MatRipple
-],
+  imports: [MatGridListModule, MatRipple, AsyncPipe],
   templateUrl: './dashboard-component.html',
   styleUrl: './dashboard-component.scss',
 })
 export class DashboardComponent {
   public inpatients: Array<{ name: string; status: Urgency; summary: string }>;
   public Urgency = Urgency;
+
+  // Inside your component class
+  private breakpointObserver = inject(BreakpointObserver);
+
+  cols$ = this.breakpointObserver
+    .observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ])
+    .pipe(
+      map((result) => {
+        if (
+          result.breakpoints[Breakpoints.XSmall] ||
+          result.breakpoints[Breakpoints.Small]
+        )
+          return 1;
+        if (result.breakpoints[Breakpoints.Medium]) return 3;
+        return 4; // Default for Web
+      }),
+    );
 
   constructor() {
     this.inpatients = [
