@@ -1,18 +1,101 @@
-<h1>Before you arrive...</h1>
+<h1>Before you arrive…</h1>
 <p>
   Tell us your current condition and any relevant medical history. We'll create
   a preliminary triage report to allow you to be more quickly served upon your
   arrival.
 </p>
 
-<form>
-  <mat-form-field style="width: 100%">
-    <mat-label>Indicate your condition</mat-label>
-    <textarea matInput rows="5" placeholder="Ex. I feel like..."></textarea>
-  </mat-form-field>
+<!-- ── Input form (hidden once result is shown) ── -->
+@if (!result()) {
+  <form (ngSubmit)="submit()" class="intake-form">
 
-  <button matButton="filled">
-    <mat-icon>send</mat-icon>
-    Submit
-  </button>
-</form>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Your name (optional)</mat-label>
+      <input matInput [ngModel]="name()" (ngModelChange)="name.set($event)"
+             name="name" placeholder="Jane Doe" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Indicate your condition</mat-label>
+      <textarea matInput rows="6"
+                [ngModel]="symptoms()" (ngModelChange)="symptoms.set($event)"
+                name="symptoms"
+                placeholder="Ex. I feel chest tightness and shortness of breath for the past hour…"
+                required></textarea>
+    </mat-form-field>
+
+    @if (errorMsg()) {
+      <p class="error-msg">{{ errorMsg() }}</p>
+    }
+
+    <button mat-flat-button color="primary" type="submit" [disabled]="loading()">
+      @if (loading()) {
+        <mat-spinner diameter="20" class="btn-spinner"></mat-spinner>
+        Analysing…
+      } @else {
+        <mat-icon>send</mat-icon>
+        Submit
+      }
+    </button>
+
+  </form>
+}
+
+<!-- ── Result card ── -->
+@if (result(); as r) {
+  <div class="result-card">
+
+    <!-- Header -->
+    <div class="result-header">
+      <span class="result-name">{{ r.name }}</span>
+      <span class="urgency-badge" [ngClass]="urgencyClass(r.urgency)">
+        {{ r.urgency }}
+      </span>
+    </div>
+
+    <hr />
+
+    <!-- Deep-learning classifier row (only shown when model is loaded) -->
+    @if (r.classifier_urgency) {
+      <div class="source-block model-block">
+        <div class="source-label">
+          <mat-icon class="source-icon">psychology</mat-icon>
+          Deep Learning Model
+        </div>
+        <div class="source-body">
+          <span class="urgency-badge sm" [ngClass]="urgencyClass(r.classifier_urgency)">
+            {{ r.classifier_urgency }}
+          </span>
+          <span class="confidence">{{ r.classifier_confidence }}% confidence</span>
+        </div>
+      </div>
+    }
+
+    <!-- Gemini AI row -->
+    <div class="source-block gemini-block">
+      <div class="source-label">
+        <mat-icon class="source-icon">auto_awesome</mat-icon>
+        Gemini AI Summary
+      </div>
+      <p class="source-body result-summary">{{ r.summary }}</p>
+    </div>
+
+    <!-- Department + routing instruction -->
+    <div class="source-block">
+      <div class="source-label">
+        <mat-icon class="source-icon">local_hospital</mat-icon>
+        Recommended Department
+      </div>
+      <p class="source-body result-dept">{{ r.department }}</p>
+      @if (r.routing) {
+        <p class="routing-instruction">{{ r.routing }}</p>
+      }
+    </div>
+
+    <button mat-stroked-button (click)="reset()" class="new-btn">
+      <mat-icon>add</mat-icon>
+      Submit another patient
+    </button>
+
+  </div>
+}

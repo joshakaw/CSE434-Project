@@ -13,3 +13,4 @@
 /Backend/classifier/models/healthguide_model/model.safetensors
 /TestResults
 /.pytest_cahce
+Backend/classifier/healthguide/__pycache__/

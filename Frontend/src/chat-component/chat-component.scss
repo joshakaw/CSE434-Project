@@ -1,0 +1,147 @@
+.intake-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 640px;
+
+  button[mat-flat-button] {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.btn-spinner {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.error-msg {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* ── Result card ── */
+.result-card {
+  max-width: 640px;
+  background: var(--mat-sys-surface-container, #f5f5f5);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  hr {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    margin: 4px 0;
+  }
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.result-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* ── Source blocks (model / Gemini / department) ── */
+.source-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.source-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  font-weight: 600;
+}
+
+.source-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+
+.source-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.model-block .source-body {
+  flex-direction: row;
+  align-items: center;
+}
+
+.confidence {
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+
+.result-summary,
+.result-dept {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ── Urgency badges ── */
+.urgency-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+
+  &.sm {
+    padding: 2px 9px;
+    font-size: 0.72rem;
+  }
+}
+
+.urgency-emergency {
+  background: #b71c1c;
+  color: #fff;
+}
+
+.urgency-urgent {
+  background: #e65100;
+  color: #fff;
+}
+
+.urgency-non-urgent {
+  background: #1b5e20;
+  color: #fff;
+}
+
+.routing-instruction {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.65;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.new-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+}

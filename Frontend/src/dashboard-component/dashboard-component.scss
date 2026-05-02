@@ -1,53 +1,164 @@
-/* Container to center content inside the tile */
+.empty-state {
+  opacity: 0.6;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
 .tile-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
   height: 100%;
   width: 100%;
-  padding: 10px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* Mimics mat-card-title styling */
+/* Name + urgency badge row */
+.tile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.tile-badges {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.tile-warn {
+  font-size: 10px;
+  font-weight: 700;
+  color: #f9a825;
+  background: rgba(249, 168, 37, 0.15);
+  border: 1px solid rgba(249, 168, 37, 0.4);
+  border-radius: 20px;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+
 .tile-title {
-  font-size: 20px;
-  font-weight: 500;
-  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Mimics mat-card-subtitle styling */
-.tile-subtitle {
-  font-size: 14px;
-  color: var(--mat-sys-primary);
-  margin-top: 4px;
+/* Classifier model row */
+.tile-model-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
 }
 
-.tile-subtitle.urgent {
-  color: var(--mat-sys-error)
+.tile-model-label {
+  font-size: 11px;
+  opacity: 0.55;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-/* The line separator */
+.tile-conf {
+  font-size: 11px;
+  opacity: 0.55;
+}
+
+/* Department */
+.tile-dept {
+  font-size: 11px;
+  opacity: 0.55;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.tile-routing {
+  font-style: italic;
+}
+
+/* Urgency badges */
+.tile-badge {
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--mat-sys-surface-container-highest);
+  color: var(--mat-sys-on-surface);
+
+  &.sm {
+    padding: 1px 7px;
+    font-size: 10px;
+  }
+}
+
+.urgent { background: #e65100; color: #fff; }
+.emergency { background: #b71c1c; color: #fff; }
+
+/* Separator */
 .separator {
   width: 100%;
   border: 0;
-  border-top: 1px solid var(--mat-sys-surface-container-highest); /* Light gray line */
-  margin: 12px 0;
+  border-top: 1px solid var(--mat-sys-surface-container-highest);
+  margin: 6px 0 4px;
 }
 
-/* Summary styling */
+/* Gemini label + summary */
+.tile-summary-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.45;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
 .tile-summary {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--mat-sys-on-surface-variant);
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.tile-hint {
+  font-size: 10px;
+  opacity: 0;
+  text-align: center;
+  margin-top: auto;
+  padding-top: 6px;
+  transition: opacity 0.2s;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .grid-tile {
   background-color: var(--mat-sys-surface-container-low);
   cursor: pointer;
+  transition: box-shadow 0.2s;
 }
 
 .grid-tile:hover {
-  // background-color: var(--mat-sys-surface-container-low);
   box-shadow: var(--mat-sys-level4);
+}
+
+.grid-tile:hover .tile-hint {
+  opacity: 0.4;
 }

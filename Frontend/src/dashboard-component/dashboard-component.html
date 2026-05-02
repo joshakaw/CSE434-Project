@@ -1,19 +1,58 @@
 <h1>Incoming Patients</h1>
-<mat-grid-list [cols]="cols$ | async" rowHeight="200px" gutterSize="8px">
-  @for (item of inpatients; track $index) {
-    <mat-grid-tile class="grid-tile">
-      <div class="tile-content" matRipple [matRippleUnbounded]="false">
-        <div class="tile-title">{{ item.name }}</div>
 
-        @if (item.status == Urgency.Urgent) {
-          <div class="tile-subtitle urgent">Urgent</div>
+@if ((patients$ | async)?.length === 0) {
+  <p class="empty-state">No patients have submitted reports yet.</p>
+}
+
+<mat-grid-list [cols]="cols$ | async" rowHeight="240px" gutterSize="8px">
+  @for (item of (patients$ | async); track item.id) {
+    <mat-grid-tile class="grid-tile">
+      <div class="tile-content" matRipple [matRippleUnbounded]="false"
+           (click)="openDetail(item)" style="cursor:pointer">
+
+        <!-- Name + final urgency -->
+        <div class="tile-header">
+          <div class="tile-title">{{ item.name }}</div>
+          <div class="tile-badges">
+            @if (item.models_disagree) {
+              <span class="tile-warn" title="Gemini and the deep learning model disagree on urgency">
+                ⚠ Review
+              </span>
+            }
+            <div class="tile-badge" [ngClass]="urgencyClass(item.urgency)">
+              {{ item.urgency }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Classifier row -->
+        @if (item.classifier_urgency) {
+          <div class="tile-model-row">
+            <span class="tile-model-label">Model:</span>
+            <span class="tile-badge sm" [ngClass]="urgencyClass(item.classifier_urgency)">
+              {{ item.classifier_urgency }}
+            </span>
+            <span class="tile-conf">{{ item.classifier_confidence }}%</span>
+          </div>
         }
+
+        <!-- Department -->
+        <div class="tile-dept">
+          {{ item.department }}
+          @if (item.routing) {
+            <span class="tile-routing"> — {{ item.routing }}</span>
+          }
+        </div>
 
         <hr class="separator" />
 
-        <div class="tile-summary">
-          {{ item.summary }}
-        </div>
+        <!-- Gemini summary -->
+        <div class="tile-summary-label">Gemini</div>
+        <div class="tile-summary">{{ item.summary }}</div>
+
+        <!-- Click hint -->
+        <div class="tile-hint">Click for full details</div>
+
       </div>
     </mat-grid-tile>
   }
